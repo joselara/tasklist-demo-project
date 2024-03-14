@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,4 +22,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+
+    Route::resources([
+        'tasks' => TaskController::class,
+    ]);
+
+    Route::post('/tasks/update-priorities', [TaskController::class, 'updatePriorities'])->name('tasks.update-priorities');
 });
